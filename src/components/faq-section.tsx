@@ -3,34 +3,34 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 export function FAQSection() {
   const faqs = [
     {
-      question: "Насколько безопасна процедура SynapseAI?",
+      question: "Чем Revenue Layer отличается от обычного чат-бота?",
       answer:
-        "Да, процедура выполняется прецизионным хирургическим роботом и прошла обширное тестирование. Все материалы биосовместимы и одобрены FDA для медицинского применения.",
+        "Чат-боты ждут сообщений и отвечают на вопросы. Revenue Layer анализирует поведение, видит покупательское намерение и подключает менеджера в момент максимальной вероятности сделки. Это слой управления выручкой, а не просто чат.",
     },
     {
-      question: "Сколько длится операция?",
+      question: "Сколько времени занимает внедрение?",
       answer:
-        "Малоинвазивная процедура обычно занимает 2-3 часа и проводится под местной анестезией с седацией.",
+        "Один тег на сайт — и система начинает работать. Без сценариев, без обучения команды, без интеграторов. Первые сигналы — в день установки. Быстрее, чем запуск рекламной кампании.",
     },
     {
-      question: "Можно ли удалить устройство?",
+      question: "Как оно понимает, кто готов к покупке?",
       answer:
-        "Да, SynapseAI разработан полностью обратимым. Устройство можно безопасно удалить при необходимости, хотя это требуется редко.",
+        "Система анализирует поведенческие сигналы: время на странице с ценами, повторные посещения, изучение кейсов, сравнение тарифов. Когда паттерн совпадает с профилем готовности — запускается контекстное вовлечение.",
     },
     {
-      question: "Какие ощущения при использовании SynapseAI?",
+      question: "Нужно ли менять CRM или процессы?",
       answer:
-        "Пользователи отмечают, что управление устройствами силой мысли ощущается естественно и интуитивно после короткого периода обучения. От самого импланта нет физических ощущений.",
+        "Нет. Revenue Layer работает поверх вашей текущей инфраструктуры. Он добавляет слой обнаружения намерения, не заменяя CRM. Ваш отдел продаж просто начинает видеть, кто готов к разговору.",
     },
     {
-      question: "Как долго работает батарея?",
+      question: "Что, если это не сработает?",
       answer:
-        "Устройство заряжается беспроводным способом и работает полный день на одном заряде. Зарядка выполняется внешним устройством, размещаемым рядом с головой.",
+        "Главный риск — не установка. А незнание, сколько сделок вы уже теряете. Мы можем запустить пилот → показать сигналы → потом вы решите. Без обязательств.",
     },
     {
-      question: "Кто может получить SynapseAI?",
+      question: "Подходит ли это моему бизнесу?",
       answer:
-        "В настоящее время мы фокусируемся на людях с тяжелым параличом. Соответствие определяется через комплексную медицинскую оценку.",
+        "Revenue Layer создан для B2B-компаний с высоким чеком, длинным циклом сделки и sales-assisted моделью. Если у вас сложное решение, которое клиенты изучают перед покупкой — это для вас. Не подходит для импульсного ecommerce и self-service.",
     },
   ]
 
@@ -38,9 +38,9 @@ export function FAQSection() {
     <section className="py-24 bg-black">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 font-orbitron">Частые вопросы</h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto font-space-mono">
-            Ответы на популярные вопросы о технологии SynapseAI, безопасности и опыте пациентов.
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Частые вопросы</h2>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            Ответы на главные вопросы об управлении покупательским намерением
           </p>
         </div>
 
@@ -48,10 +48,10 @@ export function FAQSection() {
           <Accordion type="single" collapsible className="w-full">
             {faqs.map((faq, index) => (
               <AccordionItem key={index} value={`item-${index}`} className="border-red-500/20 mb-4">
-                <AccordionTrigger className="text-left text-lg font-semibold text-white hover:text-red-400 font-orbitron px-6 py-4">
+                <AccordionTrigger className="text-left text-lg font-semibold text-white hover:text-red-400 px-6 py-4">
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="text-gray-300 leading-relaxed px-6 pb-4 font-space-mono">
+                <AccordionContent className="text-gray-300 leading-relaxed px-6 pb-4">
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>
