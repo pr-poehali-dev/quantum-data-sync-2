@@ -114,79 +114,83 @@ const Scene = () => {
 }
 
 export const Hero3DWebGL = () => {
-  const titleWords = "Synapse AI".split(" ")
-  const subtitle = "Нейроинтерфейсы нового поколения."
-  const [visibleWords, setVisibleWords] = useState(0)
-  const [subtitleVisible, setSubtitleVisible] = useState(false)
-  const [delays, setDelays] = useState<number[]>([])
-  const [subtitleDelay, setSubtitleDelay] = useState(0)
+  const [animationStep, setAnimationStep] = useState(0)
 
   useEffect(() => {
-    setDelays(titleWords.map(() => Math.random() * 0.07))
-    setSubtitleDelay(Math.random() * 0.1)
-  }, [titleWords.length])
-
-  useEffect(() => {
-    if (visibleWords < titleWords.length) {
-      const timeout = setTimeout(() => setVisibleWords(visibleWords + 1), 600)
-      return () => clearTimeout(timeout)
-    } else {
-      const timeout = setTimeout(() => setSubtitleVisible(true), 800)
-      return () => clearTimeout(timeout)
-    }
-  }, [visibleWords, titleWords.length])
+    const timer = setTimeout(() => setAnimationStep(1), 300)
+    return () => clearTimeout(timer)
+  }, [])
 
   return (
-    <div className="h-screen bg-black relative overflow-hidden">
+    <div className="min-h-screen bg-black relative overflow-hidden py-20">
       <div className="absolute inset-0 pointer-events-none z-10">
         <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-black to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent" />
-        <div className="absolute top-0 bottom-0 left-0 w-32 bg-gradient-to-r from-black to-transparent" />
-        <div className="absolute top-0 bottom-0 right-0 w-32 bg-gradient-to-l from-black to-transparent" />
       </div>
 
-      <div className="h-screen uppercase items-center w-full absolute z-[60] pointer-events-none px-10 flex justify-center flex-col">
-        <div className="text-3xl md:text-5xl xl:text-6xl 2xl:text-7xl font-extrabold font-orbitron">
-          <div className="flex space-x-2 lg:space-x-6 overflow-hidden text-white">
-            {titleWords.map((word, index) => (
-              <div
-                key={index}
-                className={index < visibleWords ? "fade-in" : ""}
-                style={{
-                  animationDelay: `${index * 0.13 + (delays[index] || 0)}s`,
-                  opacity: index < visibleWords ? undefined : 0,
-                }}
-              >
-                {word}
+      <div className="max-w-7xl mx-auto px-6 relative z-20 pt-32 pb-20">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Левая колонка - текст */}
+          <div className={`space-y-8 ${animationStep >= 1 ? 'fade-in' : 'opacity-0'}`}>
+            <div className="space-y-4">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
+                Ваш сайт видят покупатели.
+                <br />
+                <span className="text-red-500">Но вы не знаете, кто готов купить.</span>
+              </h1>
+              <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
+                Автоматически распознаёт готовность к покупке, запускает контекстный диалог и подключает отдел продаж, пока клиент ещё в решении.
+              </p>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-4">
+              <button className="px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-colors text-lg">
+                Посмотреть, сколько вы теряете
+              </button>
+              <button className="px-8 py-4 border-2 border-gray-600 hover:border-gray-400 text-white font-semibold rounded-lg transition-colors text-lg">
+                Установить за 15 минут
+              </button>
+            </div>
+          </div>
+
+          {/* Правая колонка - управленческая панель */}
+          <div className={`${animationStep >= 1 ? 'fade-in' : 'opacity-0'}`} style={{ animationDelay: '0.2s' }}>
+            <div className="bg-gradient-to-br from-gray-900 to-black border border-gray-800 rounded-2xl p-8 shadow-2xl">
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-xl font-bold text-white">Сегодня</h3>
+                <span className="text-sm text-gray-400">Live</span>
               </div>
-            ))}
-          </div>
-        </div>
-        <div className="text-xs md:text-xl xl:text-2xl 2xl:text-3xl mt-2 overflow-hidden text-white font-bold max-w-4xl mx-auto text-center px-4">
-          <div
-            className={subtitleVisible ? "fade-in-subtitle" : ""}
-            style={{
-              animationDelay: `${titleWords.length * 0.13 + 0.2 + subtitleDelay}s`,
-              opacity: subtitleVisible ? undefined : 0,
-            }}
-          >
-            {subtitle}
+
+              <div className="space-y-6">
+                <div className="flex justify-between items-center pb-4 border-b border-gray-800">
+                  <span className="text-gray-400">Покупательские сигналы</span>
+                  <span className="text-3xl font-bold text-white">37</span>
+                </div>
+
+                <div className="flex justify-between items-center pb-4 border-b border-gray-800">
+                  <span className="text-gray-400">Вовлечены автоматически</span>
+                  <span className="text-3xl font-bold text-green-500">24</span>
+                </div>
+
+                <div className="flex justify-between items-center pb-4 border-b border-gray-800">
+                  <span className="text-gray-400">Квалифицированные лиды</span>
+                  <span className="text-3xl font-bold text-blue-500">9</span>
+                </div>
+
+                <div className="flex justify-between items-center pb-4 border-b border-gray-800">
+                  <span className="text-gray-400">Оценка pipeline</span>
+                  <span className="text-3xl font-bold text-purple-500">$126,000</span>
+                </div>
+
+                <div className="flex justify-between items-center pt-2">
+                  <span className="text-gray-400">Потеряно</span>
+                  <span className="text-3xl font-bold text-red-500">13</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-
-      <Canvas
-        flat
-        gl={{
-          antialias: true,
-          alpha: false,
-          powerPreference: "high-performance",
-        }}
-        camera={{ position: [0, 0, 1] }}
-        style={{ background: "#000000" }}
-      >
-        <Scene />
-      </Canvas>
     </div>
   )
 }
